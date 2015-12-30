@@ -1,0 +1,34 @@
+# File format version
+0
+
+# Note that empty lines and lines prefixed with # are ignored
+
+# Level Name
+Example Level
+
+# Size X Y count(textures)
+32 16 4
+
+# TextureMap
+B=textures/bricks.jpg
+W=textures/wood.jpg
+M=textures/md.jpg
+R=textures/rj.jpg
+
+# Begin Map
+WWWWWWWWWWWWWWWWBBBBBBBBBBBBBBBB
+B              BW              W
+B              BW              W
+B          R   BW    R     R   W
+B              BW              W
+B              BW              W
+B              BW              W
+B       S                      W
+B              BW              W
+B              BW              W
+B              BW              W
+B    M         BW    M     M   W
+B              BW              W
+B              BW              W
+B              BW              W
+WWWWWWWWWWWWWWWWBBBBBBBBBBBBBBBB
