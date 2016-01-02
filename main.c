@@ -188,13 +188,14 @@ game_render(game_t * game)
     double x = ((double)w) / ((double)game->width) - 0.5f;
     double angle = atan2(x, foc_len);
 
-    double distance = map_cast_sample(game->map, game->column_buf, game->player_pos, game->player_rot + angle, -1);
+    SDL_Rect srcrect = {0};
+    SDL_Surface * srctext = NULL;
+    double distance = map_cast_sample(game->map, &srctext, &srcrect, game->player_pos, game->player_rot + angle, -1);
     double z = distance * cos(angle);
     double height = ((double)game->height * 1.3f) / z;
     if(height > 0) {
       SDL_Rect col = {x: w, y: ((((double)game->height) / 2.0f) * (1.0f + 1.0f / z)) - height, w: 1, h: height};
-      SDL_SetSurfaceBlendMode(game->column_buf, SDL_BLENDMODE_NONE);
-      SDL_BlitScaled(game->column_buf, NULL, game->window_surface, &col);
+      SDL_BlitScaled(srctext, &srcrect, game->window_surface, &col);
       uint8_t a = z > 15 ? 255 : 15 * z;
       SDL_FillRect(game->column_buf, NULL,  SDL_MapRGBA(game->column_buf->format, 0, 0, 0, a));
       SDL_SetSurfaceBlendMode(game->column_buf, SDL_BLENDMODE_BLEND);
@@ -218,7 +219,7 @@ main(int argc, char *argv[])
 
   game_t game = {0};
 
-  game_init(&game, 800, 600);
+  game_init(&game, 1920, 1080);
   game.map = map_new_load(argv[1], game.width, game.height, game.window_surface->format);
   if(!game.map) {
     printf("map parsing failed\n");

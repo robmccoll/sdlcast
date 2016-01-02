@@ -28,7 +28,7 @@ map_t *
 map_free(map_t * map);
 
 double
-map_cast_sample(map_t * map, SDL_Surface * outbuf, vec2f_t point, double angle, double range);
+map_cast_sample(map_t * map, SDL_Surface ** outtextptr, SDL_Rect * outtextrect, vec2f_t point, double angle, double range);
 
 int
 map_is_block(map_t * map, int32_t x, int32_t y);

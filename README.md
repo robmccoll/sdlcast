@@ -8,7 +8,6 @@ TODO
 ====
 
 - Fix weird rendering up close
-- Stop making a needless copy when casting
 - Add optional floor and ceiling rendering
 - Add optional skybox
 - Make tuning pass

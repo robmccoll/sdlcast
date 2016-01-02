@@ -165,7 +165,7 @@ double vec2f_dist(vec2f_t * a, vec2f_t * b) {
 }
 
 double
-map_cast_sample(map_t * map, SDL_Surface * outbuf, vec2f_t point, double angle, double range) {
+map_cast_sample(map_t * map, SDL_Surface ** outtextptr, SDL_Rect * outtextrect, vec2f_t point, double angle, double range) {
   double sina = sin(angle);
   double cosa = cos(angle);
 
@@ -194,7 +194,8 @@ map_cast_sample(map_t * map, SDL_Surface * outbuf, vec2f_t point, double angle, 
             int32_t img_col = (((double)map->texture_list[wall]->w) * 
                 (curpoint.x > point.x ? ceil(curpoint.y) - curpoint.y : curpoint.y - floor(curpoint.y)));
             SDL_Rect col = {x: img_col, y: 0, w: 1, h: map->texture_list[wall]->h};
-            SDL_BlitScaled(map->texture_list[wall], &col, outbuf, NULL);
+            *outtextptr = map->texture_list[wall];
+            *outtextrect = col;
             return vec2f_dist(&point, &curpoint);
           }
         }
@@ -205,7 +206,8 @@ map_cast_sample(map_t * map, SDL_Surface * outbuf, vec2f_t point, double angle, 
             int32_t img_col = (((double)map->texture_list[wall]->w) * 
                 (curpoint.x > point.x ? ceil(curpoint.y) - curpoint.y : curpoint.y - floor(curpoint.y)));
             SDL_Rect col = {x: img_col, y: 0, w: 1, h: map->texture_list[wall]->h};
-            SDL_BlitScaled(map->texture_list[wall], &col, outbuf, NULL);
+            *outtextptr = map->texture_list[wall];
+            *outtextrect = col;
             return vec2f_dist(&point, &curpoint);
           }
         }
@@ -221,7 +223,8 @@ map_cast_sample(map_t * map, SDL_Surface * outbuf, vec2f_t point, double angle, 
             int32_t img_col = (((double)map->texture_list[wall]->w) * 
                 (curpoint.y < point.y ? ceil(curpoint.x) - curpoint.x : curpoint.x - floor(curpoint.x)));
             SDL_Rect col = {x: img_col, y: 0, w: 1, h: map->texture_list[wall]->h};
-            SDL_BlitScaled(map->texture_list[wall], &col, outbuf, NULL);
+            *outtextptr = map->texture_list[wall];
+            *outtextrect = col;
             return vec2f_dist(&point, &curpoint);
           }
         }
@@ -232,7 +235,8 @@ map_cast_sample(map_t * map, SDL_Surface * outbuf, vec2f_t point, double angle, 
             int32_t img_col = (((double)map->texture_list[wall]->w) * 
                 (curpoint.y < point.y ? ceil(curpoint.x) - curpoint.x : curpoint.x - floor(curpoint.x)));
             SDL_Rect col = {x: img_col, y: 0, w: 1, h: map->texture_list[wall]->h};
-            SDL_BlitScaled(map->texture_list[wall], &col, outbuf, NULL);
+            *outtextptr = map->texture_list[wall];
+            *outtextrect = col;
             return vec2f_dist(&point, &curpoint);
           }
         }
