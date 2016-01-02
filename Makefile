@@ -7,3 +7,7 @@ all: sdlcast
 
 sdlcast: main.c map.c
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) 
+
+.PHONY: clean
+clean:
+	rm sdlcast
